@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MoreVertical, Wifi, WifiOff, Eye, EyeOff, Edit, Trash, Settings } from 'lucide-react';
+import { MoreVertical, Wifi, WifiOff, Eye, Edit, Trash, Settings } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Vehicle {
@@ -75,7 +75,7 @@ export const VehicleList: React.FC = () => {
         </div>
       </div>
       
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1 h-[calc(100vh-110px)]">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50 sticky top-0 z-10">
             <tr>
