@@ -98,4 +98,49 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  .vehicle-marker {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .vehicle-marker-moving {
+    background-color: #10B981;
+  }
+  
+  .vehicle-marker-stopped {
+    background-color: #EF4444;
+  }
+  
+  .vehicle-marker:hover .vehicle-info {
+    display: block;
+  }
+  
+  .vehicle-info {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    margin-bottom: 5px;
+  }
+  
+  .leaflet-container {
+    height: 100%;
+    width: 100%;
+  }
 }
