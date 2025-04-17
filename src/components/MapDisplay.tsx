@@ -8,45 +8,93 @@ type MapType = 'osm' | 'google' | 'google-hybrid' | 'google-satellite' | 'leafle
 export const MapDisplay: React.FC = () => {
   const [mapType, setMapType] = useState<MapType>('osm');
   const [showMapSelector, setShowMapSelector] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(5); // Initial zoom level
+
+  // Function to handle zoom in
+  const handleZoomIn = () => {
+    if (zoomLevel < 10) {
+      setZoomLevel(prev => prev + 1);
+    }
+  };
+
+  // Function to handle zoom out
+  const handleZoomOut = () => {
+    if (zoomLevel > 1) {
+      setZoomLevel(prev => prev - 1);
+    }
+  };
 
   // Mock map component - in a real app, this would integrate with actual map libraries
   const renderMap = () => {
-    // This is a placeholder for the actual map implementation
+    // Calculate a scale factor for the mock map based on zoom level
+    const scaleFactor = 100 + (zoomLevel * 25); // Adjust from 125% to 350% based on zoom level
+    
     return (
       <div className="relative w-full h-full bg-gray-100 overflow-hidden">
         {/* Placeholder map content */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-full h-full flex items-center justify-center relative">
             {mapType === 'osm' && (
-              <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: 'url(https://a.tile.openstreetmap.org/7/63/42.png)', backgroundSize: '200% 200%'}}></div>
+              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-300 ease-in-out" 
+                   style={{
+                     backgroundImage: 'url(https://a.tile.openstreetmap.org/7/63/42.png)', 
+                     backgroundSize: `${scaleFactor}% ${scaleFactor}%`
+                   }}>
+              </div>
             )}
             {mapType === 'google' && (
-              <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: 'url(https://maps.googleapis.com/maps/api/staticmap?center=35.7,10.8&zoom=8&size=600x400&key=DEMO_KEY)', backgroundSize: '200% 200%'}}></div>
+              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-300 ease-in-out" 
+                   style={{
+                     backgroundImage: 'url(https://maps.googleapis.com/maps/api/staticmap?center=35.7,10.8&zoom=8&size=600x400&key=DEMO_KEY)', 
+                     backgroundSize: `${scaleFactor}% ${scaleFactor}%`
+                   }}>
+              </div>
             )}
             {mapType === 'google-hybrid' && (
-              <div className="absolute inset-0 bg-cover bg-center bg-gray-200" style={{backgroundSize: '200% 200%', filter: 'saturate(1.2) contrast(1.1)'}}></div>
+              <div className="absolute inset-0 bg-cover bg-center bg-gray-200 transition-transform duration-300 ease-in-out" 
+                   style={{
+                     backgroundSize: `${scaleFactor}% ${scaleFactor}%`, 
+                     filter: 'saturate(1.2) contrast(1.1)'
+                   }}>
+              </div>
             )}
             {mapType === 'google-satellite' && (
-              <div className="absolute inset-0 bg-cover bg-center bg-gray-800" style={{backgroundSize: '200% 200%', filter: 'saturate(0.8) contrast(1.2)'}}></div>
+              <div className="absolute inset-0 bg-cover bg-center bg-gray-800 transition-transform duration-300 ease-in-out" 
+                   style={{
+                     backgroundSize: `${scaleFactor}% ${scaleFactor}%`, 
+                     filter: 'saturate(0.8) contrast(1.2)'
+                   }}>
+              </div>
             )}
             {mapType === 'leaflet' && (
-              <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: 'url(https://a.tile.openstreetmap.org/7/63/42.png)', backgroundSize: '200% 200%', filter: 'hue-rotate(15deg)'}}></div>
+              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-300 ease-in-out" 
+                   style={{
+                     backgroundImage: 'url(https://a.tile.openstreetmap.org/7/63/42.png)', 
+                     backgroundSize: `${scaleFactor}% ${scaleFactor}%`, 
+                     filter: 'hue-rotate(15deg)'
+                   }}>
+              </div>
             )}
             
-            {/* Vehicle markers */}
-            <div className="absolute" style={{top: '42%', left: '58%'}}>
+            {/* Vehicle markers - positions adjusted based on zoom level */}
+            <div className="absolute transition-all duration-300 ease-in-out" 
+                 style={{top: `${42 - (zoomLevel - 5) * 2}%`, left: `${58 + (zoomLevel - 5) * 1}%`}}>
               <VehicleMarker id="02-216905" speed={17} direction={45} />
             </div>
-            <div className="absolute" style={{top: '50%', left: '65%'}}>
+            <div className="absolute transition-all duration-300 ease-in-out" 
+                 style={{top: `${50 - (zoomLevel - 5) * 2}%`, left: `${65 + (zoomLevel - 5) * 1}%`}}>
               <VehicleMarker id="02-218140" speed={0} direction={90} />
             </div>
-            <div className="absolute" style={{top: '38%', left: '70%'}}>
+            <div className="absolute transition-all duration-300 ease-in-out" 
+                 style={{top: `${38 - (zoomLevel - 5) * 2}%`, left: `${70 + (zoomLevel - 5) * 1}%`}}>
               <VehicleMarker id="02-218997" speed={0} direction={180} />
             </div>
-            <div className="absolute" style={{top: '56%', left: '54%'}}>
+            <div className="absolute transition-all duration-300 ease-in-out" 
+                 style={{top: `${56 - (zoomLevel - 5) * 2}%`, left: `${54 + (zoomLevel - 5) * 1}%`}}>
               <VehicleMarker id="02-215432" speed={49} direction={270} />
             </div>
-            <div className="absolute" style={{top: '45%', left: '63%'}}>
+            <div className="absolute transition-all duration-300 ease-in-out" 
+                 style={{top: `${45 - (zoomLevel - 5) * 2}%`, left: `${63 + (zoomLevel - 5) * 1}%`}}>
               <VehicleMarker id="02-213880" speed={0} direction={0} />
             </div>
           </div>
@@ -126,10 +174,18 @@ export const MapDisplay: React.FC = () => {
         </div>
         
         <div className="bg-white rounded-md shadow border border-gray-300">
-          <button className="p-2 hover:bg-gray-100 w-full border-b border-gray-200">
+          <button 
+            className="p-2 hover:bg-gray-100 w-full border-b border-gray-200 transition-colors duration-200" 
+            onClick={handleZoomIn}
+            title="Zoom in"
+          >
             <ZoomIn size={16} className="mx-auto" />
           </button>
-          <button className="p-2 hover:bg-gray-100 w-full">
+          <button 
+            className="p-2 hover:bg-gray-100 w-full transition-colors duration-200" 
+            onClick={handleZoomOut}
+            title="Zoom out"
+          >
             <ZoomOut size={16} className="mx-auto" />
           </button>
         </div>
@@ -141,6 +197,11 @@ export const MapDisplay: React.FC = () => {
         <button className="bg-white p-2 rounded-md shadow hover:bg-gray-100 border border-gray-300">
           <Locate size={16} />
         </button>
+      </div>
+      
+      {/* Zoom level indicator */}
+      <div className="absolute bottom-10 right-4 bg-white bg-opacity-80 px-2 py-1 rounded-md shadow text-xs font-medium">
+        Zoom: {zoomLevel}
       </div>
       
       {/* Attribution */}

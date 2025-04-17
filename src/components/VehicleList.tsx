@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { MoreVertical, Wifi, WifiOff, Eye, EyeOff, Edit, Trash, Settings } from 'lucide-react';
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Vehicle {
   id: string;
@@ -74,9 +75,9 @@ export const VehicleList: React.FC = () => {
         </div>
       </div>
       
-      <div className="overflow-y-auto flex-1">
+      <ScrollArea className="flex-1">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+          <thead className="bg-gray-50 sticky top-0 z-10">
             <tr>
               <th scope="col" className="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <div className="flex items-center">
@@ -161,7 +162,7 @@ export const VehicleList: React.FC = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </ScrollArea>
     </div>
   );
 };
