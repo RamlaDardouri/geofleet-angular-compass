@@ -176,4 +176,5 @@ const Search = ({ size, className }) => (
   </svg>
 );
 
-export default VehicleList;
+// Change the export to be named instead of default
+export { VehicleList };
