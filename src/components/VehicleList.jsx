@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MoreVertical, Wifi, WifiOff, Eye, Edit, Trash, Settings } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -176,5 +175,4 @@ const Search = ({ size, className }) => (
   </svg>
 );
 
-// Change the export to be named instead of default
 export { VehicleList };
