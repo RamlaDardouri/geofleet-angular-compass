@@ -3,17 +3,8 @@ import React, { useState } from 'react';
 import { MoreVertical, Wifi, WifiOff, Eye, Edit, Trash, Settings } from 'lucide-react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-interface Vehicle {
-  id: string;
-  name: string;
-  timestamp: string;
-  speed: number;
-  online: boolean;
-  icon: string;
-}
-
-export const VehicleList: React.FC = () => {
-  const [vehicles, setVehicles] = useState<Vehicle[]>([
+const VehicleList = () => {
+  const [vehicles, setVehicles] = useState([
     { id: '02-213326', name: '02-213326', timestamp: '2024-07-20 15:08:09', speed: 0, online: false, icon: '🚗' },
     { id: '02-213880', name: '02-213880', timestamp: '2024-12-11 10:59:26', speed: 0, online: false, icon: '🚗' },
     { id: '02-214274', name: '02-214274', timestamp: '2023-09-25 11:56:07', speed: 0, online: false, icon: '🚚' },
@@ -29,8 +20,8 @@ export const VehicleList: React.FC = () => {
     { id: 'FOTON 02-216538', name: 'FOTON 02-216538', timestamp: '2023-04-15 19:28:17', speed: 0, online: false, icon: '🏍️' },
   ]);
 
-  const [selectedVehicles, setSelectedVehicles] = useState<string[]>([]);
-  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+  const [selectedVehicles, setSelectedVehicles] = useState([]);
+  const [openMenuId, setOpenMenuId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
   const toggleSelectAll = () => {
@@ -41,7 +32,7 @@ export const VehicleList: React.FC = () => {
     }
   };
 
-  const toggleVehicleSelection = (id: string) => {
+  const toggleVehicleSelection = (id) => {
     if (selectedVehicles.includes(id)) {
       setSelectedVehicles(selectedVehicles.filter(vid => vid !== id));
     } else {
@@ -49,7 +40,7 @@ export const VehicleList: React.FC = () => {
     }
   };
 
-  const toggleMenu = (id: string) => {
+  const toggleMenu = (id) => {
     setOpenMenuId(openMenuId === id ? null : id);
   };
 
@@ -167,7 +158,7 @@ export const VehicleList: React.FC = () => {
   );
 };
 
-const Search = ({ size, className }: { size: number, className: string }) => (
+const Search = ({ size, className }) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
     width={size} 
@@ -184,3 +175,5 @@ const Search = ({ size, className }: { size: number, className: string }) => (
     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
   </svg>
 );
+
+export default VehicleList;
