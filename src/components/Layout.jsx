@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { Navbar } from './Navbar';
-import { VehicleList } from './VehicleList';
+import { Navbar } from './Navbar.jsx';
+import { VehicleList } from './VehicleList.jsx';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
